@@ -1,34 +1,35 @@
 package main
 
 import (
-    "encoding/json"
-    "os"
-    "fmt"
+	"encoding/json"
+	"fmt"
+	"os"
 )
 
-type Host struct {
-  url       []string
-  port      int
+type hosts struct {
+	url  []string
+	port int
 }
 
-type Mesos struct {
-    hosts   []Host
+type mesos struct {
+	hosts []hosts
 }
-type K8s struct {
-    hosts   []Host
-}
-
-type Configuration struct {
-  Mesos   Mesos
-  K8s     K8s
+type k8s struct {
+	hosts []hosts
 }
 
-
-file, _ := os.Open("conf.json")
-decoder := json.NewDecoder(file)
-configuration := Configuration{}
-err := decoder.Decode(&configuration)
-if err != nil {
-  fmt.Println("error:", err)
+type config struct {
+	mesos mesos
+	k8s   k8s
 }
-fmt.Println(configuration.Users) // output: [UserA, UserB]
+
+func main() {
+	file, _ := os.Open("conf.json")
+	decoder := json.NewDecoder(file)
+	configuration := config{}
+	err := decoder.Decode(&configuration)
+	if err != nil {
+		fmt.Println("error-f:", err)
+	}
+	fmt.Println(configuration.mesos) // output: [UserA, UserB]
+}
