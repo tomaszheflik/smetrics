@@ -6,19 +6,32 @@ Use JSON to pass all **Mesos** and **K8s** environments to get metrics.
 ##### JSON Example
 ```json
 {
-    "mesos": { 
+    "mesos": {
         "hosts": [
-            "mesos-master-1", 
-            "mesos-master-2", 
-            "mesos-master-3", 
-            "mesos-master-4"
-        ]   
+            {
+              "url": "mesos-master-1.domain.pl",
+              "port": "8000"
+            },
+            {
+              "url": "mesos-master-2.domain.pl",
+              "port": "8000"
+            },
+            {
+              "url": "mesos-master-3.domain.pl",
+              "port": "8000"
+            }
+        ]
     },
     "k8s": {
         "hosts": [
-            "k8s-master-1",
-            "k8s-master-2",
-            "k8s-master-3"
+            {
+              "url":"k8s-master-1.domain.pl",
+              "port": "8999"
+            },
+            {
+              "url":"k8s-master-2.domain.pl",
+              "port": "8999"
+            }
         ]
     }
 }
