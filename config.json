@@ -2,16 +2,19 @@
     "mesos": {
         "hosts": [
             {
-              "url": "mesos-master-1.domain.pl",
-              "port": "8000"
+              "url": "msm-rpi.mesos.rot.hybris.com",
+              "port": "5050",
+              "endpoint": "/metrics/snapshot"
             },
             {
-              "url": "mesos-master-2.domain.pl",
-              "port": "8000"
+              "url": "msm-sevenup.mesos.rot.hybris.com",
+              "port": "8000",
+              "endpoint": "/metrics/snapshot"
             },
             {
               "url": "mesos-master-3.domain.pl",
-              "port": "8000"
+              "port": "8000",
+              "endpoint": "/metrics/snapshot"
             }
         ]
     },
