@@ -7,20 +7,17 @@ import (
 )
 
 type hosts struct {
-	url  []string
+	url  string
 	port int
 }
 
-type mesos struct {
-	hosts []hosts
-}
-type k8s struct {
+type cluster struct {
 	hosts []hosts
 }
 
 type config struct {
-	mesos mesos
-	k8s   k8s
+	mesos cluster
+	k8s   cluster
 }
 
 func main() {
