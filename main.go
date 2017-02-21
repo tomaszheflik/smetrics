@@ -22,4 +22,6 @@ func main() {
 		fmt.Printf("ENV: %s, slaves total: %2.f, connected: %2.f, lost %2.f\n", configuration.Mesos.Hosts[i].URL, metrics.SlavesTotal, metrics.SlavesActive, metrics.SlaveDisconected)
 	}
 	fmt.Printf("Total slaves: %2.f, connected: %2.f, lost %2.f\n", metSumary.SlavesTotal, metSumary.SlavesActive, metSumary.SlaveDisconected)
+	//Iterate over ENV and get Slaves PID's
+	//Iterate over slaves PID and get metrics
 }
