@@ -36,8 +36,7 @@ type MesMetrics struct {
 
 func main() {
 	var configuration Config
-
-	var allmertics MesMetrics
+	var metSumary MesMetrics
 	content, _ := ioutil.ReadFile("config.json")
 	err := json.Unmarshal(content, &configuration)
 	if err != nil {
@@ -45,8 +44,12 @@ func main() {
 	}
 	for i := 0; i < len(configuration.Mesos.Hosts); i++ {
 		metrics := MesosMetrics(configuration.Mesos.Hosts[i].URL, configuration.Mesos.Hosts[i].Port)
+		metSumary.SlavesTotal += metrics.SlavesTotal
+		metSumary.SlavesActive += metrics.SlavesActive
+		metSumary.SlaveDisconected += metrics.SlaveDisconected
+		fmt.Printf("ENV: %s, slaves total: %2.f, slaves connected: %2.f, slave lost %2.f\n", configuration.Mesos.Hosts[i].URL, metrics.SlavesTotal, metrics.SlavesActive, metrics.SlaveDisconected)
 	}
-
+	fmt.Printf("Total slaves: %2.f, total slaves connected: %2.f, total slave lost %2.f\n", metSumary.SlavesTotal, metSumary.SlavesActive, metSumary.SlaveDisconected)
 }
 
 // Dump proints propperly formated JSON
