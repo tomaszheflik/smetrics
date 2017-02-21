@@ -8,14 +8,50 @@
             },
             {
               "url": "msm-sevenup.mesos.rot.hybris.com",
-              "port": "8000",
+              "port": "5050",
               "endpoint": "/metrics/snapshot"
             },
             {
-              "url": "mesos-master-3.domain.pl",
-              "port": "8000",
+              "url": "msm-argonauts.mesos.rot.hybris.com",
+              "port": "5050",
+              "endpoint": "/metrics/snapshot"
+            },
+            {
+              "url": "msm-bananas.mesos.rot.hybris.com",
+              "port": "5050",
+              "endpoint": "/metrics/snapshot"
+            },
+            {
+              "url": "msm-framefrog.mesos.rot.hybris.com",
+              "port": "5050",
+              "endpoint": "/metrics/snapshot"
+            },
+            {
+              "url": "msm-gophers.mesos.rot.hybris.com",
+              "port": "5050",
+              "endpoint": "/metrics/snapshot"
+            },
+            {
+              "url": "msm-gorilla.mesos.rot.hybris.com",
+              "port": "5050",
+              "endpoint": "/metrics/snapshot"
+            },
+            {
+              "url": "msm-emergency.yrdci.fra.hybris.com",
+              "port": "5050",
+              "endpoint": "/metrics/snapshot"
+            },
+            {
+              "url": "msm-toad.mesos.rot.hybris.com",
+              "port": "5050",
+              "endpoint": "/metrics/snapshot"
+            },
+            {
+              "url": "msm-wombats.mesos.rot.hybris.com",
+              "port": "5050",
               "endpoint": "/metrics/snapshot"
             }
+
         ]
     },
     "k8s": {

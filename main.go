@@ -12,8 +12,8 @@ import (
 // Hosts holds cluster definition
 type Hosts struct {
 	URL      string `json:"url"`
-	PORT     string `json:"port"`
-	ENDPOINT string `json:"endpoint"`
+	Port     string `json:"port"`
+	Endpoint string `json:"endpoint"`
 }
 
 // Cluster definition
@@ -27,28 +27,46 @@ type Config struct {
 	K8s   Cluster `json:"k8s"`
 }
 
+// MesMetrics holds information on slaves, ram , cpu
+type MesMetrics struct {
+	SlavesTotal      float64
+	SlavesActive     float64
+	SlaveDisconected float64
+}
+
 func main() {
-	content, _ := ioutil.ReadFile("config.json")
 	var configuration Config
+
+	var allmertics MesMetrics
+	content, _ := ioutil.ReadFile("config.json")
 	err := json.Unmarshal(content, &configuration)
 	if err != nil {
 		fmt.Println("error-f:", err)
 	}
-	// Dump(configuration.Mesos.Hosts[0])
-	mesosurl := fmt.Sprintf("http://%s:%s/", configuration.Mesos.Hosts[0].URL, configuration.Mesos.Hosts[0].PORT)
-	node, _ := url.Parse(mesosurl)
-	mesos := megos.NewClient([]*url.URL{node}, nil)
-	state, _ := mesos.DetermineLeader()
-	metrics, err := mesos.GetMetricsSnapshot(state)
-	if err != nil {
-		panic(err)
+	for i := 0; i < len(configuration.Mesos.Hosts); i++ {
+		metrics := MesosMetrics(configuration.Mesos.Hosts[i].URL, configuration.Mesos.Hosts[i].Port)
 	}
-	fmt.Printf("Mesos: %s slaves total: %2.f, active: %2.f, disconected: %2.f\n", configuration.Mesos.Hosts[0].URL, metrics.MasterSlavesActive, metrics.MasterSlavesConnected, metrics.MasterSlavesInactive)
-	// Dump(metrics.MasterSlavesActive)
+
 }
 
 // Dump proints propperly formated JSON
 func Dump(obj interface{}) {
 	result, _ := json.MarshalIndent(obj, "", "\t")
 	fmt.Println(string(result))
+}
+
+// MesosMetrics return metrics from particular mesos master
+func MesosMetrics(URL string, Port string) (metrics MesMetrics) {
+	mesosurl := fmt.Sprintf("http://%s:%s/", URL, Port)
+	node, _ := url.Parse(mesosurl)
+	mesos := megos.NewClient([]*url.URL{node}, nil)
+	state, _ := mesos.DetermineLeader()
+	met, err := mesos.GetMetricsSnapshot(state)
+	if err != nil {
+		panic(err)
+	}
+	metrics.SlavesTotal = met.MasterSlavesActive
+	metrics.SlavesActive = met.MasterSlavesConnected
+	metrics.SlaveDisconected = met.MasterSlavesInactive
+	return
 }
