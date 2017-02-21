@@ -18,9 +18,13 @@ type Config struct {
 	K8s   Cluster `json:"k8s"`
 }
 
-// MesMetrics holds information on slaves, ram , cpu
-type MesMetrics struct {
+// MESMetrics holds information on slaves
+type MESMetrics struct {
 	SlavesTotal      float64
 	SlavesActive     float64
 	SlaveDisconected float64
+}
+
+//SLSMetrics holds information about slave ram, cpu, disks
+type SLAMetrics struct {
 }

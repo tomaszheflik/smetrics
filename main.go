@@ -8,7 +8,7 @@ import (
 
 func main() {
 	var configuration Config
-	var metSumary MesMetrics
+	var metSumary MESMetrics
 	content, _ := ioutil.ReadFile("config.json")
 	err := json.Unmarshal(content, &configuration)
 	if err != nil {

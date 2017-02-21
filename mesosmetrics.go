@@ -8,7 +8,7 @@ import (
 )
 
 // MesosMetrics return metrics from particular mesos master
-func MesosMetrics(URL string, Port string) (metrics MesMetrics) {
+func MesosMetrics(URL string, Port string) (metrics MESMetrics) {
 	mesosurl := fmt.Sprintf("http://%s:%s/", URL, Port)
 	node, _ := url.Parse(mesosurl)
 	mesos := megos.NewClient([]*url.URL{node}, nil)
@@ -23,7 +23,7 @@ func MesosMetrics(URL string, Port string) (metrics MesMetrics) {
 	return
 }
 
-//MesosSlavesMetrics collect metrics from all slaves
-func MesosSlavesMetrics(string string) {
+//MSlavesMetrics collect metrics from all slaves
+func MSlavesMetrics(string string) {
 
 }
